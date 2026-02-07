@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dfu83rrq3a5ty"]
+
+[ext_resource type="Script" uid="uid://bwju70jmaice3" path="res://gameinit/game_init.gd" id="1_4wlxd"]
+
+[node name="GameInit" type="Node" unique_id=102922649]
+script = ExtResource("1_4wlxd")
