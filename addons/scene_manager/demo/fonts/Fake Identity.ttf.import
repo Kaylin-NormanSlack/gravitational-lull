@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c5nya6skib7a2"
-path="res://.godot/imported/Fake Identity.ttf-4a9078e26ad276cfebb11121c25bc9b2.fontdata"
+path="res://.godot/imported/Fake Identity.ttf-4e52d871b0a9314d4ac7a23c493f378e.fontdata"
 
 [deps]
 
-source_file="res://demo/fonts/Fake Identity.ttf"
-dest_files=["res://.godot/imported/Fake Identity.ttf-4a9078e26ad276cfebb11121c25bc9b2.fontdata"]
+source_file="res://addons/scene_manager/demo/fonts/Fake Identity.ttf"
+dest_files=["res://.godot/imported/Fake Identity.ttf-4e52d871b0a9314d4ac7a23c493f378e.fontdata"]
 
 [params]
 
