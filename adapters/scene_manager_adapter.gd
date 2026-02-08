@@ -17,6 +17,7 @@ func get_supported_events() -> Array[String]:
 	]
 
 func handle_event(event: Dictionary) -> void:
+	print("Handling Event!")
 	match event.get("type", ""):
 		"scene_change_request":
 			_handle_scene_change(event)

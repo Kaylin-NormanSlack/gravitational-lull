@@ -3,5 +3,5 @@
 extends BaseEventBus
 class_name InputBus
 
-signal input_pressed
-signal input_released
+signal move_axis(payload)
+signal jump_pressed(payload)
