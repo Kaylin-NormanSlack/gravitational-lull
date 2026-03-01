@@ -10,7 +10,7 @@ class_name CameraBus
 signal camera_focus_requested(payload: Dictionary)
 
 ## Request a camera pan between two positions
-## payload: { from: Vector2, to: Vector2, duration: float }
+## payload: { from: Vector2, to: Vector2, durati w sdon: float }
 signal camera_pan_requested(payload: Dictionary)
 
 ## Request a camera shake effect
@@ -26,3 +26,5 @@ signal camera_release_requested
 ## Change camera behavior mode
 ## payload: { mode: String }
 signal camera_mode_changed(payload: Dictionary)
+
+signal camera_velocity_changed(payload: Dictionary)

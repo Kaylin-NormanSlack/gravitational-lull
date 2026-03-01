@@ -1,6 +1,5 @@
 extends BaseEventBus
 class_name GameBus
 
-signal world_rotation_requested
 signal pause_requested
 signal resume_requested

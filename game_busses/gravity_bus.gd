@@ -5,7 +5,5 @@ class_name GravityBus
 # Gravity Intent Signals
 # --------------------------------------------------
 
-##  { vector_direction: "UP" or "up"} VECTOR2.UP, VECTOR2.DOWN, etc.
+##  {strength,direction (VECTOR2.UP/DOWN,transition_time}
 signal gravity_changed(payload)
-
-signal gravity_enabled(payload) # { enabled: bool }

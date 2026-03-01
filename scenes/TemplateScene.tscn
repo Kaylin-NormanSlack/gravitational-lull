@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://mgo54kvj2q7p" path="res://scripts/Components/scene_ready_component.gd" id="1_586v2"]
 [ext_resource type="PackedScene" uid="uid://d3xdw6vk2anc1" path="res://scenes/Player.tscn" id="1_gwjgo"]
 [ext_resource type="Texture2D" uid="uid://gebnaywjui4a" path="res://icon.svg" id="2_586v2"]
+[ext_resource type="Script" uid="uid://dddtn12y8ukpf" path="res://scripts/controllers/lull_controller.gd" id="2_l7il6"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_l7il6"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_bljpe"]
+[ext_resource type="Script" uid="uid://mh3c0qn0byru" path="res://scripts/camera_target.gd" id="7_bljpe"]
+[ext_resource type="Script" uid="uid://3rfah35fp462" path="res://scripts/platform_spawner.gd" id="8_q1jub"]
+[ext_resource type="PackedScene" uid="uid://tm1jouquxdrt" path="res://scenes/sample_small_platform.tscn" id="9_vblgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_328w6"]
 size = Vector2(22.880003, 9.949997)
@@ -16,14 +20,32 @@ metadata/_custom_type_script = "uid://8umksf8e80fw"
 
 [node name="TemplateScene" type="Node2D" unique_id=171071522]
 script = ExtResource("1_586v2")
-camera_name = "PlayerCamera"
+camera_name = "WorldCamera"
+
+[node name="Lull Controller" type="Node2D" parent="." unique_id=987593246]
+position = Vector2(-1, 0)
+script = ExtResource("2_l7il6")
+enabled = false
+
+[node name="CameraTarget" type="Node2D" parent="." unique_id=665189214]
+position = Vector2(-2, 0)
+script = ExtResource("7_bljpe")
+enabled = false
+
+[node name="PlatformSpawner" type="Node2D" parent="." unique_id=1140331015]
+script = ExtResource("8_q1jub")
+platform_scene = ExtResource("9_vblgl")
 
 [node name="Player" parent="." unique_id=607875018 instance=ExtResource("1_gwjgo")]
 position = Vector2(5, -483)
 collision_mask = 2
 
-[node name="MoveComponent" parent="Player" index="1" unique_id=1508363186]
+[node name="ScreenWrapComponent" parent="Player" index="1" unique_id=1935610601 node_paths=PackedStringArray("camera_target")]
+camera_target = NodePath("../../CameraTarget")
+
+[node name="MoveComponent" parent="Player" index="2" unique_id=1508363186]
 move_speed = 800.0
+jump_velocity = -1000.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=171667377]
 collision_layer = 2
@@ -36,12 +58,12 @@ shape = SubResource("RectangleShape2D_328w6")
 scale = Vector2(8.921875, 1.578125)
 texture = ExtResource("2_586v2")
 
-[node name="PlayerCamera" type="Node2D" parent="." unique_id=2015415327 node_paths=PackedStringArray("follow_target")]
+[node name="WorldCamera" type="Node2D" parent="." unique_id=1737192540 node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(7, -481)
+position = Vector2(0, 2)
 script = ExtResource("3_l7il6")
 follow_mode = 2
-follow_target = NodePath("../Player")
+follow_target = NodePath("../CameraTarget")
 tween_resource = SubResource("Resource_586v2")
 follow_offset = Vector2(2, 2)
 follow_damping = true

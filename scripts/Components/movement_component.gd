@@ -11,10 +11,6 @@ class_name MovementComponent
 @export var move_speed: float = 200.0
 @export var jump_velocity: float = -400.0
 
-# Gravity should eventually live in GravityComponent,
-# but kept here for now to minimize churn
-@export var gravity: float = 980.0
-
 ## -----------------------------
 ## Cached references
 ## -----------------------------
@@ -93,7 +89,6 @@ func _physics_process(delta: float) -> void:
 	if not enabled:
 		return
 
-	_apply_gravity(delta)
 	_apply_horizontal_movement()
 	_apply_jump()
 
@@ -102,10 +97,6 @@ func _physics_process(delta: float) -> void:
 ## -----------------------------
 ## Mechanics (single-purpose)
 ## -----------------------------
-
-func _apply_gravity(delta: float) -> void:
-	if not _body.is_on_floor():
-		_body.velocity.y += gravity * delta
 
 func _apply_horizontal_movement() -> void:
 	_body.velocity.x = _move_axis * move_speed

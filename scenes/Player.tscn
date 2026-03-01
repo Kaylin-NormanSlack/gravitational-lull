@@ -1,19 +1,28 @@
 [gd_scene format=3 uid="uid://d3xdw6vk2anc1"]
 
 [ext_resource type="Script" uid="uid://cibohngrc4ol5" path="res://scripts/Components/movement_component.gd" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bcgea8kw1cd7j" path="res://scripts/Components/gravity_component.gd" id="2_3li8b"]
 [ext_resource type="Texture2D" uid="uid://dchkkx4v3ikpw" path="res://addons/phantom_camera/icons/phantom_camera_2d.svg" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://brlsss8vfpdk6" path="res://scenes/screen_wrap_component.gd" id="4_mdl7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1270726511]
-slide_on_ceiling = false
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1886932723]
 scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_3li8b")
 
+[node name="ScreenWrapComponent" type="Node" parent="." unique_id=1935610601]
+script = ExtResource("4_mdl7e")
+margin = 20.0
+
 [node name="MoveComponent" type="Node" parent="." unique_id=1508363186]
 script = ExtResource("1_p0vlq")
+
+[node name="GravityComponent" type="Node" parent="." unique_id=1403340020]
+script = ExtResource("2_3li8b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=609792680]
 texture = ExtResource("2_v6fml")
