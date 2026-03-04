@@ -22,30 +22,24 @@ metadata/_custom_type_script = "uid://8umksf8e80fw"
 script = ExtResource("1_586v2")
 camera_name = "WorldCamera"
 
-[node name="Lull Controller" type="Node2D" parent="." unique_id=987593246]
-position = Vector2(-1, 0)
-script = ExtResource("2_l7il6")
-enabled = false
+[node name="Player" parent="." unique_id=607875018 instance=ExtResource("1_gwjgo")]
+position = Vector2(5, -215)
+collision_mask = 2
+
+[node name="MoveComponent" parent="Player" index="1" unique_id=1508363186]
+move_speed = 300.0
 
 [node name="CameraTarget" type="Node2D" parent="." unique_id=665189214]
 position = Vector2(-2, 0)
 script = ExtResource("7_bljpe")
-enabled = false
+
+[node name="Lull Controller" type="Node2D" parent="." unique_id=987593246]
+position = Vector2(-1, 0)
+script = ExtResource("2_l7il6")
 
 [node name="PlatformSpawner" type="Node2D" parent="." unique_id=1140331015]
 script = ExtResource("8_q1jub")
 platform_scene = ExtResource("9_vblgl")
-
-[node name="Player" parent="." unique_id=607875018 instance=ExtResource("1_gwjgo")]
-position = Vector2(5, -483)
-collision_mask = 2
-
-[node name="ScreenWrapComponent" parent="Player" index="1" unique_id=1935610601 node_paths=PackedStringArray("camera_target")]
-camera_target = NodePath("../../CameraTarget")
-
-[node name="MoveComponent" parent="Player" index="2" unique_id=1508363186]
-move_speed = 800.0
-jump_velocity = -1000.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=171667377]
 collision_layer = 2

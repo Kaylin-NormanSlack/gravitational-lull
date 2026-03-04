@@ -30,7 +30,7 @@ func _create_buses():
 	GlobalBusManager.register_bus("CameraBus", BaseEventBus.new())
 	GlobalBusManager.register_bus("UIBus", BaseEventBus.new())
 	GlobalBusManager.register_bus("GameBus", BaseEventBus.new())
-	GlobalBusManager.register_bus("GravityBus", GravityBus.new())
+	GlobalBusManager.register_bus("WorldBus", BaseEventBus.new())
 	GlobalBusManager.register_bus("InputBus", InputBus.new())
 	GlobalBusManager.register_bus("AudioBus", BaseEventBus.new())
 	GlobalBusManager.register_bus("SceneBus", BaseEventBus.new())

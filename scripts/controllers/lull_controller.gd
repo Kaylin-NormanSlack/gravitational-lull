@@ -4,7 +4,6 @@ class_name LullController
 ## -----------------------------
 ## Configuration
 ## -----------------------------
-
 @export var enabled := true
 
 @export var base_world_speed := 80.0
@@ -20,8 +19,7 @@ class_name LullController
 ## Runtime State
 ## -----------------------------
 
-var _camera_bus : BaseEventBus
-var _gravity_bus : BaseEventBus
+var _world_bus : BaseEventBus
 
 var _direction := -1
 var _current_world_speed := 80.0
@@ -37,7 +35,11 @@ func _ready():
 		return
 
 	_resolve_buses()
-	await(_resolve_buses())
+	
+	#These Are temporary. 
+	#They will be controlled by the game controller in the future.
+	_emit_gravity(base_gravity_strength, _direction, transition_time)
+	_emit_world_velocity(base_world_speed,transition_time)
 
 func _physics_process(delta):
 	if not enabled:
@@ -56,11 +58,8 @@ func _physics_process(delta):
 ## -----------------------------
 
 func _resolve_buses():
-	if GlobalBusManager.has_bus("CameraBus"):
-		_camera_bus = GlobalBusManager.get_bus("CameraBus")
-
-	if GlobalBusManager.has_bus("GravityBus"):
-		_gravity_bus = GlobalBusManager.get_bus("GravityBus")
+	if GlobalBusManager.has_bus("WorldBus"):
+		_world_bus = GlobalBusManager.get_bus("WorldBus")
 
 ## -----------------------------
 ## Public Control
@@ -76,20 +75,20 @@ func reverse_world():
 	var target_gravity_direction := -_direction
 
 	# Step 1 — Slow to zero
-	_emit_camera_velocity(0.0, transition_time * 0.5)
+	_emit_world_velocity(0.0, transition_time * 0.5)
 	_emit_gravity(base_gravity_strength, _direction, transition_time * 0.5)
 
 	await get_tree().create_timer(transition_time * 0.5).timeout
 
 	# Optional pause at stillness
 	if pause_at_zero > 0.0:
-		await get_tree().create_timer(pause_at_zero).timeout
+		await get_tree().create_timer(pause_at_zero).timeoutdsdaw
 
 	# Step 2 — Reverse
 	_direction *= -1
 	_current_world_speed = abs(base_world_speed) * _direction
 
-	_emit_camera_velocity(_current_world_speed, transition_time * 0.5)
+	_emit_world_velocity(_current_world_speed, transition_time * 0.5)
 	_emit_gravity(base_gravity_strength, _direction, transition_time * 0.5)
 
 	await get_tree().create_timer(transition_time * 0.5).timeout
@@ -101,23 +100,23 @@ func reverse_world():
 ## Event Emission
 ## -----------------------------
 
-func _emit_camera_velocity(speed: float, duration: float):
-	if _camera_bus == null:
+func _emit_world_velocity(speed: float, duration: float):
+	if _world_bus == null:
 		return
 
-	_camera_bus.emit_event({
-		"type":"camera_velocity_changed",
-		"velocity": base_world_speed
+	_world_bus.emit_event({
+		"type":"world_velocity_changed",
+		"velocity": speed
 	})
 	
 
 func _emit_gravity(strength: float, direction: float, duration: float):
-	if _gravity_bus == null:
+	if _world_bus == null:
 		return
 
-	_gravity_bus.emit_event({
+	_world_bus.emit_event({
 		"type": "gravity_changed",
 		"strength": strength,
-		"direction": direction,
+		"directi on": direction,
 		"transition_time": duration
 	})

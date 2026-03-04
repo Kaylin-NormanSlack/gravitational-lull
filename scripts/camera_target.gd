@@ -4,7 +4,7 @@ class_name CameraTarget
 @export var enabled = true
 
 var _velocity = 80.0
-var _camera_bus : BaseEventBus
+var _world_bus : BaseEventBus
 
 func _ready():
 	_resolve_bus()
@@ -15,16 +15,16 @@ func _physics_process(delta):
 	
 
 func _resolve_bus():
-	if GlobalBusManager.has_bus("CameraBus"):
-		_camera_bus = GlobalBusManager.get_bus("CameraBus")
+	if GlobalBusManager.has_bus("WorldBus"):
+		_world_bus = GlobalBusManager.get_bus("WorldBus")
 	_connect_signals()
 		
 func _connect_signals() -> void:
-	if not _camera_bus.event_emitted.is_connected(_on_camera_event):
-		_camera_bus.event_emitted.connect(_on_camera_event)
+	if not _world_bus.event_emitted.is_connected(_on_event):
+		_world_bus.event_emitted.connect(_on_event)
 		
-func _on_camera_event(event: Dictionary):
-	match(event.get("type","")):
-		"camera_velocity_changed":
+func _on_event(event: Dictionary) -> void:
+	match event.get("type", ""):
+		"world_velocity_changed":
 			var new_velocity = event.get("velocity")
 			_velocity = new_velocity

@@ -15,7 +15,7 @@ class_name GravityComponent
 ## -----------------------------
 
 var _body : CharacterBody2D
-var _gravity_bus : BaseEventBus
+var _world_bus : BaseEventBus
 
 ## -----------------------------
 ## Lifecycle
@@ -33,24 +33,24 @@ func _ready() -> void:
 	_resolve_bus()
 
 func _exit_tree() -> void:
-	if _gravity_bus and _gravity_bus.event_emitted.is_connected(_on_gravity_event):
-		_gravity_bus.event_emitted.disconnect(_on_gravity_event)
+	if _world_bus and _world_bus.event_emitted.is_connected(_on_gravity_event):
+		_world_bus.event_emitted.disconnect(_on_gravity_event)
 
 ## -----------------------------
 ## Bus Resolution
 ## -----------------------------
 
 func _resolve_bus():
-	if GlobalBusManager.has_bus("GravityBus"):
-		_gravity_bus = GlobalBusManager.get_bus("GravityBus")
-		_gravity_bus.event_emitted.connect(_on_gravity_event)
+	if GlobalBusManager.has_bus("WorldBus"):
+		_world_bus = GlobalBusManager.get_bus("WorldBus")
+		_world_bus.event_emitted.connect(_on_gravity_event)
 	else:
 		GlobalBusManager.bus_registered.connect(_on_bus_registered)
 
 func _on_bus_registered(name: String, bus: BaseEventBus) -> void:
-	if name == "GravityBus":
-		_gravity_bus = bus
-		_gravity_bus.event_emitted.connect(_on_gravity_event)
+	if name == "WorldBus":
+		_world_bus = bus
+		_world_bus.event_emitted.connect(_on_gravity_event)
 
 ## -----------------------------
 ## Event Handling

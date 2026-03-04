@@ -10,19 +10,18 @@
 [node name="Player" type="CharacterBody2D" unique_id=1270726511]
 collision_layer = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1886932723]
-scale = Vector2(6, 6)
-shape = SubResource("RectangleShape2D_3li8b")
-
 [node name="ScreenWrapComponent" type="Node" parent="." unique_id=1935610601]
 script = ExtResource("4_mdl7e")
-margin = 20.0
 
 [node name="MoveComponent" type="Node" parent="." unique_id=1508363186]
 script = ExtResource("1_p0vlq")
 
 [node name="GravityComponent" type="Node" parent="." unique_id=1403340020]
 script = ExtResource("2_3li8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1886932723]
+scale = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=609792680]
 texture = ExtResource("2_v6fml")

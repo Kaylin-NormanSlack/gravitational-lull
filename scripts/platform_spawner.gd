@@ -1,7 +1,7 @@
 extends Node2D
 class_name PlatformSpawner
 
-var _camera_bus : BaseEventBus
+var _world_bus : BaseEventBus
 
 @export var platform_scene: PackedScene
 @export var vertical_spacing := 200.0
@@ -13,8 +13,8 @@ var _gravity_direction := 1.0
 
 func _ready():
 	_camera_target = get_node("../CameraTarget")
-	_camera_bus = GlobalBusManager.get_bus("CameraBus")
-	_camera_bus.event_emitted.connect(_on_event)
+	_world_bus = GlobalBusManager.get_bus("WorldBus")
+	_world_bus.event_emitted.connect(_on_event)
 	
 	
 func _on_event(event: Dictionary):
